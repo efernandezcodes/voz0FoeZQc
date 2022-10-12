@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Author: Edward Fernandez <efernandez.codes@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <catalog>
+            <price_information>
+                <endpoint_url><![CDATA[https://stagecerewards.carrierenterprise.com/v1/price]]></endpoint_url>
+            </price_information>
+        </catalog>
+    </default>
+</config>

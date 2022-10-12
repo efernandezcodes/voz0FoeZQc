@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Author: Edward Fernandez <efernandez.codes@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="catalog">
+            <group id="price_information" translate="label" type="text" sortOrder="405" showInDefault="1">
+                <label>Price Information Integration</label>
+                <field id="enabled" translate="label" type="select" sortOrder="0" showInDefault="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="endpoint_url" translate="label" sortOrder="100" type="text" showInDefault="1" canRestore="1">
+                    <label>API Endpoint</label>
+                </field>
+                <field id="debug" translate="label comment" type="select" sortOrder="200" showInDefault="1" canRestore="1">
+                    <label>Debug</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[When enabled, price API responses are logged to /var/log/price.log]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
