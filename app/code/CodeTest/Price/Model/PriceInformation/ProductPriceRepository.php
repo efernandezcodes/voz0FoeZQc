@@ -6,32 +6,30 @@ namespace CodeTest\Price\Model\PriceInformation;
 
 use CodeTest\Price\Api\Data\PriceInterface;
 use CodeTest\Price\Api\Data\PriceInterfaceFactory;
-use CodeTest\Price\Api\PriceRepositoryInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Pricing\Helper\Data as PriceHelper;
 
-class ProductPriceRepository implements PriceRepositoryInterface
+class ProductPriceRepository extends AbstractPriceInfoRepository
 {
-    /**
-     * @var PriceInterfaceFactory
-     */
-    protected PriceInterfaceFactory $priceFactory;
-
     /**
      * @var ProductRepositoryInterface
      */
     protected ProductRepositoryInterface $productRepository;
 
     /**
-     * @param PriceInterfaceFactory $priceFactory
      * @param ProductRepositoryInterface $productRepository
+     * @param PriceInterfaceFactory $priceFactory
+     * @param PriceHelper $priceHelper
      */
     public function __construct(
+        ProductRepositoryInterface $productRepository,
         PriceInterfaceFactory $priceFactory,
-        ProductRepositoryInterface $productRepository
+        PriceHelper $priceHelper
     ) {
-        $this->priceFactory = $priceFactory;
         $this->productRepository = $productRepository;
+
+        parent::__construct($priceFactory, $priceHelper);
     }
 
     /**
@@ -46,11 +44,6 @@ class ProductPriceRepository implements PriceRepositoryInterface
             return null;
         }
 
-        return $this->priceFactory->create([
-            'data' => [
-                PriceInterface::PRODUCT_ID => $productId,
-                PriceInterface::UNIT_PRICE => (float) $product->getPrice(),
-            ]
-        ]);
+        return $this->createPrice($productId, (float) $product->getPrice());
     }
 }

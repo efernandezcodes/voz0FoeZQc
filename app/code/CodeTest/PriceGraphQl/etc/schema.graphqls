@@ -5,4 +5,5 @@ type Query {
 type ProductPrice {
     product_id: Int! @doc(description: "Magento Product Entity ID.")
     unit_price: Float! @doc(description: "Product Unit Price.")
+    display_price: String! @doc(description: "Product Display Price.")
 }

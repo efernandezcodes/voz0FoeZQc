@@ -11,10 +11,13 @@ class Price implements GraphQlPriceResultProcessorInterface
      * ResultKey => GraphQlKey
      *
      * @var string[]
+     *
+     * @author Edward Fernandez <efernandez.codes@gmail.com>
      */
     private array $fieldMap = [
         PriceInterface::PRODUCT_ID => 'product_id',
         PriceInterface::UNIT_PRICE => 'unit_price',
+        PriceInterface::DISPLAY_PRICE => 'display_price',
     ];
 
     public function process(PriceInterface $price, array &$graphQlResult): void

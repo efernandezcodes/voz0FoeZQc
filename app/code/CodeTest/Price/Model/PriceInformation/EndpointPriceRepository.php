@@ -6,31 +6,29 @@ namespace CodeTest\Price\Model\PriceInformation;
 
 use CodeTest\Price\Api\Data\PriceInterface;
 use CodeTest\Price\Api\Data\PriceInterfaceFactory;
-use CodeTest\Price\Api\PriceRepositoryInterface;
 use CodeTest\Price\Model\PriceInformation\Command\GetUnitPriceByProductId;
+use Magento\Framework\Pricing\Helper\Data as PriceHelper;
 
-class EndpointPriceRepository implements PriceRepositoryInterface
+class EndpointPriceRepository extends AbstractPriceInfoRepository
 {
-    /**
-     * @var PriceInterfaceFactory
-     */
-    protected PriceInterfaceFactory $priceFactory;
-
     /**
      * @var GetUnitPriceByProductId
      */
     protected GetUnitPriceByProductId $getUnitPriceByProductId;
 
     /**
-     * @param PriceInterfaceFactory $priceFactory
      * @param GetUnitPriceByProductId $getUnitPriceByProductId
+     * @param PriceInterfaceFactory $priceFactory
+     * @param PriceHelper $priceHelper
      */
     public function __construct(
+        GetUnitPriceByProductId $getUnitPriceByProductId,
         PriceInterfaceFactory $priceFactory,
-        GetUnitPriceByProductId $getUnitPriceByProductId
+        PriceHelper $priceHelper
     ) {
-        $this->priceFactory = $priceFactory;
         $this->getUnitPriceByProductId = $getUnitPriceByProductId;
+
+        parent::__construct($priceFactory, $priceHelper);
     }
 
     /**
@@ -43,11 +41,6 @@ class EndpointPriceRepository implements PriceRepositoryInterface
             return null;
         }
 
-        return $this->priceFactory->create([
-            'data' => [
-                PriceInterface::PRODUCT_ID => $productId,
-                PriceInterface::UNIT_PRICE => $priceData,
-            ]
-        ]);
+        return $this->createPrice($productId, $priceData);
     }
 }

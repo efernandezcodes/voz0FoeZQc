@@ -12,6 +12,7 @@ interface PriceInterface
      */
     public const PRODUCT_ID = 'product_id';
     public const UNIT_PRICE = 'unit_price';
+    public const DISPLAY_PRICE = 'display_price';
 
     /**
      * Getter for ProductId.
@@ -44,6 +45,22 @@ interface PriceInterface
      * @return void
      */
     public function setUnitPrice(float $unitPrice): void;
+
+    /**
+     * Getter for DisplayPrice.
+     *
+     * @return string
+     */
+    public function getDisplayPrice(): string;
+
+    /**
+     * Setter for DisplayPrice.
+     *
+     * @param string $displayPrice
+     *
+     * @return void
+     */
+    public function setDisplayPrice(string $displayPrice): void;
 
     /**
      * Convert array of object data with to array with keys requested in $keys array
